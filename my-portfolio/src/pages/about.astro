@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+---
+
+<BaseLayout title="About | Your Name">
+    <Navigation />
+    <main class="about-main">
+        <h1>
+            ABOUT <span class="accent">ME</span>
+        </h1>
+        <p class="about-blurb">
+            I am a creative...
+        </p>
+        <h2 class="skills-heading">Skills</h2>
+        <ul class="skills-list">
+            <li>HTML & CSS</li>
+            <li>JavaScript</li>
+            <li>Astro</li>
+        </ul>
+    </main>
+    <style>
+        .about-main {
+            max-width: 26rem;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.7rem;
+            line-height: 1.1;
+        }
+        .accent {
+            color: var(--color-accent, #2563eb);
+        }
+        .about-blurb {
+            color: var(--color-text-secondary, #a0a0a0);
+            margin-top: 0.6rem;
+            font-size: 1.02rem;
+            line-height: 1.6;
+        }
+        .skills-heading {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            color: var(--color-accent, #2563eb);
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+        .skills-list {
+            padding-left: 1.3rem;
+            margin-top: 0.8rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        .skills-list li {
+            margin-bottom: 0.4rem;
+        }
+        @media (min-width: 40rem) {
+            .about-main {
+                max-width: 32rem;
+                padding: 3rem 2rem;
+            }
+            h1 {
+                font-size: 2.4rem;
+            }
+            .skills-heading {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</BaseLayout>

@@ -1,0 +1,107 @@
+
+
+.home-main {
+  max-width: 26rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-image {
+  width: 10rem;
+  height: 10.5rem;
+  overflow: hidden;
+  margin-bottom: -2.5rem;
+  z-index: 1;
+  position: relative;
+}
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 50%;
+  display: block;
+}
+.hero-image:hover .hero-img {
+  filter: grayscale(0%);
+}
+.hero-content {
+  text-align: center;
+  margin-top: -1.2rem;
+  z-index: 0;
+  width: 100%;
+}
+h1 {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 0.7rem;
+}
+.accent {
+  color: var(--color-accent);
+  display: block;
+}
+.hero-desc {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.6rem;
+  line-height: 1.5;
+}
+.scribble-tags {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+  min-height: 12rem;
+}
+.scribble {
+  position: absolute;
+  font-family: "Comic Sans MS", "Chalkboard", cursive;
+  color: #2563eb;
+  user-select: none;
+  pointer-events: none;
+  z-index: 4;
+  animation: float-tag 3s ease-in-out infinite alternate;
+}
+@keyframes float-tag {
+  0% { transform: translateY(0);}
+  100% { transform: translateY(0.7rem) rotate(-4deg);}
+}
+.projects-link {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  background: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.4rem 0.2rem;
+  margin-top: 2rem;
+  text-decoration: none;
+}
+.scribble-underline {
+  position: absolute;
+  left: 50%;
+  bottom: -0.3rem;
+  transform: translateX(-50%);
+  width: 7.2rem;
+  pointer-events: none;
+}
+.projects-link:hover {
+  color: #2563eb;
+}
+@media (min-width: 40rem) {
+  .home-main {
+    max-width: 32rem;
+    padding: 3rem 2rem 2rem;
+  }
+  h1 {
+    font-size: 2.4rem;
+  }
+  .hero-image {
+    width: 13rem;
+    height: 13rem;
+    margin-bottom: -3rem;
+  }
+}

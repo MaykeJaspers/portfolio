@@ -1,0 +1,86 @@
+<nav class="nav">
+    <a class="logo" href="/">PORTFOLIO</a>
+    <button
+        class="nav-toggle"
+        onclick="document.querySelector('.nav-links').classList.toggle('open')"
+        >☰</button
+    >
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/projects">Projects</a></li>
+    </ul>
+</nav>
+
+<style>
+    .nav {
+        width: 100%;
+        padding: 1rem;
+        background: #101828;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        min-height: 3.5rem;
+    }
+    .logo {
+        color: var(--color-accent, #2563eb);
+        font-weight: 900;
+        font-size: 1.3rem;
+        letter-spacing: -0.04em;
+        text-decoration: none;
+    }
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 1.2rem;
+        margin: 0;
+        padding: 0;
+    }
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        font-size: 1rem;
+        transition: color 0.2s;
+        padding: 0.4rem 0.7rem;
+        border-radius: 0.3rem;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: var(--color-accent, #2563eb);
+        background: #192247;
+    }
+    .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: #fff;
+        margin-left: auto;
+    }
+
+    /* Mobile menu */
+    @media (max-width: 35rem) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 3.5rem;
+            right: 1rem;
+            background: #101828;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.13rem 0.5rem #2222;
+            min-width: 8.5rem;
+            padding: 1rem 0.5rem;
+            z-index: 10;
+        }
+        .nav-links.open {
+            display: flex;
+        }
+        .nav-toggle {
+            display: block;
+        }
+    }
+</style>

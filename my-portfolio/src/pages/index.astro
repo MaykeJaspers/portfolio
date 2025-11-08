@@ -1,16 +1,59 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home | Mayke Jaspers">
+	<Navigation />
+	<main class="home-main">
+		<div class="hero-image">
+			<img src="/hero-image.png" alt="Your portrait" class="hero-img" />
+		</div>
+		<section class="hero-content">
+			<h1>
+				CREATIVE <span class="accent">PORTFOLIO</span>
+			</h1>
+			<p class="hero-desc">
+				Welcome! Hi my name is mayke and here you can find all my
+				digital projects and experiments below.
+			</p>
+			<a class="projects-link" href="/projects">
+				View Projects
+				<span class="scribble-underline">
+				</span>
+			</a>
+		</section>
+		<div class="scribble-tags">
+			<span
+				class="scribble floating"
+				style="top:1rem;left:-2rem;animation-duration:2.7s;"
+				>#digital</span
+			>
+			<span
+				class="scribble floating"
+				style="top:-1.2rem;left:7rem;animation-duration:3.1s;font-size:1.2rem;"
+				>#development</span
+			>
+			<span
+				class="scribble floating"
+				style="top:0.5rem;right:-2.8rem;animation-delay:.6s;"
+				>#video</span
+			>
+			<span
+				class="scribble floating"
+				style="top:6rem;left:-2rem;font-size:1.1rem;animation-duration:2.2s;"
+				>#3D</span
+			>
+			<span
+				class="scribble floating"
+				style="top:9rem;right:-2.2rem;animation-delay:0.3s;"
+				>#animation</span
+			>
+			<span
+				class="scribble floating"
+				style="top:8.2rem;left:8rem;font-size:1.05rem;animation-delay:.8s;"
+				>#design</span
+			>
+		</div>
+	</main>
+</BaseLayout>
