@@ -1,28 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import { getCollection } from "astro:content";
 
-const projectPreviews = [
-	{
-		title: "Digital Collage",
-		tag: "Design",
-		url: "/projects/digital-collage",
-		image: "src/collection/graphicSkills01.png",
-	},
-	{
-		title: "3D Portfolio",
-		tag: "3D",
-		url: "/projects/3d-portfolio",
-		image: "src/collection/graphicSkills02.png",
-	},
-	{
-		title: "Animation Demo",
-		tag: "Animation",
-		url: "/projects/animation-demo",
-		image: "src/collection/Video01.mp4",
-	},
-];
-
+const projects = await getCollection("projects");
 const programs = [
 	"Photoshop",
 	"Figma",
@@ -70,21 +51,24 @@ const programs = [
 		</section>
 
 		<section class="projects-preview">
-			<h2 class="projects-preview-title">Recent Projects</h2>
+			<h2 class="projects-preview-title">Projects</h2>
 			<div class="projects-preview-list">
 				{
-					projectPreviews.map((project) => (
-						<a href={project.url} class="project-preview-card">
+					projects.map((p) => (
+						<a
+							href={`/projects/${p.slug}`}
+							class="project-preview-card"
+						>
 							<img
-								src={project.image}
-								alt={project.title}
+								src={p.data.image}
+								alt={p.data.title}
 								class="project-preview-img"
 								loading="lazy"
 							/>
 							<div class="project-preview-title">
-								{project.title}
+								{p.data.title}
 							</div>
-							<div class="project-preview-tag">{project.tag}</div>
+							<div class="project-preview-tag">{p.data.tag}</div>
 						</a>
 					))
 				}

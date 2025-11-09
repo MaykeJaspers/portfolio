@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+
 export const collections = {
   projects: defineCollection({
     type: "content",
@@ -6,8 +7,8 @@ export const collections = {
       title: z.string(),
       description: z.string(),
       date: z.date(),
-      tags: z.array(z.string()).optional(),
-      featured: z.boolean().default(false),
+      tag: z.string(),              
+      image: z.string().optional(), 
     }),
   }),
   blog: defineCollection({
@@ -16,7 +17,6 @@ export const collections = {
       title: z.string(),
       description: z.string(),
       date: z.date(),
-      tags: z.array(z.string()).optional(),
     }),
   }),
 };
