@@ -44,7 +44,7 @@ body {
   width: 100%;
 }
 h1 {
-  font-size: 2.4rem;
+  font-size: 3.4rem;
   word-break: break-word;
   line-height: 1.05;
   margin-bottom: 0.7rem; letter-spacing: -0.03em;
@@ -62,7 +62,7 @@ h1 {
   display: inline-block; 
   position: relative;
   color: #fff; 
-  background: none; 
+  background: #2563eb; 
   font-weight: 700;
   font-size: 1.1rem; 
   padding: 0.4rem 0.2rem;
@@ -169,39 +169,43 @@ background: linear-gradient(rgba(29, 71, 154, 0.2), rgba(23, 23, 23, 0));
 }
 
 
-
 .marquee-section {
   width: 100%;
   overflow: hidden;
   margin: 2rem 0 .5rem;
   transform: rotate(2deg);
   background: var(--color-text);
+  padding: .5rem;
 }
+
 .marquee {
-  display: flex;
-  white-space: nowrap;
+  width: 100vw;
   overflow: hidden;
+  position: relative;
+  background: var(--color-text);
+}
+
+.marquee-inner {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 13s linear infinite;
+}
+
+.marquee-inner span {
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--color-accent);
-  padding: 0.4rem 0;
-  width: 100vw;
-  position: relative;
-}
-
-.marquee span {
-  display: inline-block;
   padding-right: 2rem;
-  animation: marquee-scroll 12s linear infinite;
-}
-
-.marquee span:nth-child(2) {
-  animation-delay: 6s;
+  white-space: nowrap;
 }
 
 @keyframes marquee-scroll {
-  0% { transform: translateX(0);}
-  100% { transform: translateX(-100%);}
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 
@@ -283,7 +287,6 @@ background: linear-gradient(rgba(29, 71, 154, 0.2), rgba(23, 23, 23, 0));
 .about-main {
   width: 100vw;
   max-width: 100vw;
-  padding: 1.2rem 0.6rem 1.3rem 0.6rem;
   overflow-x: hidden;
   margin: 0 auto;
   display: flex;
@@ -294,6 +297,7 @@ background: linear-gradient(rgba(29, 71, 154, 0.2), rgba(23, 23, 23, 0));
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .about-photo {
   width: 10rem;
@@ -306,6 +310,9 @@ background: linear-gradient(rgba(29, 71, 154, 0.2), rgba(23, 23, 23, 0));
   height: 100%;
   object-fit: contain;
  
+}
+.about-info{
+  text-align: center;
 }
 
 .about-main h1 {

@@ -37,13 +37,6 @@ const programs = [
 <BaseLayout title="Home | Mayke Jaspers">
 	<Navigation />
 	<main class="home-main">
-		<div class="hero-image">
-			<img
-				src="src/images/hero-image.png"
-				alt="Your portrait"
-				class="hero-img"
-			/>
-		</div>
 		<section class="hero-content">
 			<h1>
 				CREATIVE<br />
@@ -57,50 +50,22 @@ const programs = [
 				View Projects
 				<span class="scribble-underline"></span>
 			</a>
-			<div class="scribble-tags">
-				<span class="scribble floating" style="top:2.5rem;left:8%;"
-					>#Digital</span
-				>
-				<span class="scribble floating" style="top:3.5rem;right:12%;"
-					>#Development</span
-				>
-				<span
-					class="scribble floating"
-					style="top:5.2rem;left:22%;animation-delay:.6s;"
-					>#Video</span
-				>
-				<span
-					class="scribble floating"
-					style="top:6.1rem;right:17%;font-size:1.1rem;">#3D</span
-				>
-				<span
-					class="scribble floating"
-					style="top:7rem;left:11%;animation-delay:0.3s;"
-					>#Animation</span
-				>
-				<span
-					class="scribble floating"
-					style="top:8.2rem;right:28%;font-size:1.05rem;"
-					>#Design</span
-				>
-				<span
-					class="scribble floating"
-					style="top:1rem;right:10%;font-size:1.05rem;animation-delay:0.2s"
-					>#Devine</span
-				>
-			</div>
 		</section>
 
 		<section class="marquee-section">
 			<div class="marquee">
-				<span
-					>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING &nbsp;
-					• &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
-				</span>
-				<span
-					>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING &nbsp;
-					• &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
-				</span>
+				<div class="marquee-inner">
+					<span
+						>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING
+						&nbsp; • &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
+						CREATIVE THINKING &nbsp; • &nbsp;</span
+					>
+					<span
+						>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING
+						&nbsp; • &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
+						CREATIVE THINKING &nbsp; • &nbsp;</span
+					>
+				</div>
 			</div>
 		</section>
 
@@ -116,7 +81,9 @@ const programs = [
 								class="project-preview-img"
 								loading="lazy"
 							/>
-							<div class="project-preview-title" />
+							<div class="project-preview-title">
+								{project.title}
+							</div>
 							<div class="project-preview-tag">{project.tag}</div>
 						</a>
 					))
@@ -130,5 +97,5 @@ const programs = [
 				{programs.map((name) => <li class="programs-item">{name}</li>)}
 			</ul>
 		</section>
-	</main>
-</BaseLayout>
+	</main></BaseLayout
+>
