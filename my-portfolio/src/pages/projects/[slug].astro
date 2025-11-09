@@ -1,6 +1,9 @@
 ---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/Navigation.astro";
 import { getEntryBySlug, getCollection } from "astro:content";
 
+// getStaticPaths code here (as you wrote!)
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
     return projects.map((project) => ({
@@ -10,16 +13,23 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-
 if (!project) {
-    throw new Error(`Project not found`);
+    throw new Error("Project not found");
 }
 ---
 
-<main>
-    <h1>{project.data.title}</h1>
-    <img src={project.data.image} alt={project.data.title} />
-    <div>
-        {project.body}
-    </div>
-</main>
+<BaseLayout title={project.data.title + " | Mayke Jaspers"}>
+    <Navigation />
+    <main class="project-detail">
+        <h1>{project.data.title}</h1>
+        <img
+            src={project.data.image}
+            alt={project.data.title}
+            class="project-detail-img"
+        />
+
+        <div class="project-detail-body">
+            {project.body}
+        </div>
+    </main>
+</BaseLayout>
