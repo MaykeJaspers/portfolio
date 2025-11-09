@@ -1,16 +1,122 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+import { getCollection } from "astro:content";
 
+
+const projectPreviews = (await getCollection("projects"))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
+
+
+const blogPosts = (await getCollection("blog"))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
+
+const programs = [
+	"Photoshop",
+	"Figma",
+	"Astro",
+	"Blender",
+	"Premiere Pro",
+	"Illustrator",
+	"After Effects",
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home | Mayke Jaspers">
+	<Navigation />
+	<main class="home-main">
+		<section class="hero-content">
+			<h1>CREATIVE<br /><span class="accent">PORTFOLIO</span></h1>
+			<p class="hero-desc">
+				Welcome! Hi my name is mayke and here you can find all my
+				digital projects and experiments below.
+			</p>
+			<a class="projects-link" href="/projects">
+				View Projects
+				<span class="scribble-underline"></span>
+			</a>
+		</section>
+
+		<section class="marquee-section">
+			<div class="marquee">
+				<div class="marquee-inner">
+					<span
+						>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING
+						&nbsp; • &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
+						CREATIVE THINKING &nbsp; • &nbsp;</span
+					>
+					<span
+						>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING
+						&nbsp; • &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
+						CREATIVE THINKING &nbsp; • &nbsp;</span
+					>
+				</div>
+			</div>
+		</section>
+
+		<section class="projects-preview">
+			<h2 class="projects-preview-title">Recent Projects</h2>
+			<div class="projects-preview-list">
+				{
+					projectPreviews.map((project) => (
+						<a
+							href={`/projects/${project.slug}`}
+							class="project-preview-card"
+						>
+							<img
+								src={project.data.image}
+								alt={project.data.title}
+								class="project-preview-img"
+								loading="lazy"
+							/>
+							<div class="project-preview-title">
+								{project.data.title}
+							</div>
+							<div class="project-preview-tag">
+								{project.data.tag}
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="programs-section">
+			<h2 class="programs-title">Tools & programs I use</h2>
+			<ul class="programs-list">
+				{programs.map((name) => <li class="programs-item">{name}</li>)}
+			</ul>
+		</section>
+
+		<section class="blog-preview">
+			<h2 class="blog-preview-title">Latest blog posts</h2>
+			<div class="blog-preview-list">
+				{
+					blogPosts.map((post) => (
+						<a
+							href={`/blog/${post.slug}`}
+							class="blog-preview-card"
+						>
+							{post.data.image && (
+								<img
+									src={post.data.image}
+									alt={post.data.title}
+									class="blog-preview-img"
+									loading="lazy"
+								/>
+							)}
+							<div class="blog-preview-title">
+								{post.data.title}
+							</div>
+							<div class="blog-preview-desc">
+								{post.data.description}
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</section>
+	</main>
+</BaseLayout>

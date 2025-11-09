@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/Navigation.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+---
+
+<BaseLayout title="Projects | Mayke Jaspers">
+    <Navigation />
+    <main>
+        <h1>All projects</h1>
+        <div class="projects-overview-list">
+            {
+                projects.map((p) => (
+                    <a
+                        href={`/projects/${p.slug}`}
+                        class="project-overview-card"
+                    >
+                        {p.data.image && (
+                            <img
+                                src={p.data.image}
+                                alt={p.data.title}
+                                class="project-overview-img"
+                            />
+                        )}
+                    </a>
+                ))
+            }
+        </div>
+    </main>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/Navigation.astro";
+import { getEntryBySlug, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+if (!post) {
+    throw new Error("Blog post not found");
+}
+---
+
+<BaseLayout title={post.data.title + " | Blog"}>
+    <Navigation />
+    <main class="blog-detail">
+        <h1>{post.data.title}</h1>
+        {
+            post.data.image && (
+                <img
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="blog-detail-img"
+                />
+            )
+        }
+        <div class="blog-detail-body">{post.body}</div>
+    </main>
+</BaseLayout>
