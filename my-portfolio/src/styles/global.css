@@ -175,17 +175,35 @@ background: linear-gradient(rgba(29, 71, 154, 0.2), rgba(23, 23, 23, 0));
   overflow: hidden;
   margin: 2rem 0 .5rem;
   transform: rotate(2deg);
+  background: var(--color-text);
 }
 .marquee {
-  width: 100vw;
+  display: flex;
   white-space: nowrap;
   overflow: hidden;
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--color-accent);
-  background: var(--color-text);
   padding: 0.4rem 0;
+  width: 100vw;
+  position: relative;
 }
+
+.marquee span {
+  display: inline-block;
+  padding-right: 2rem;
+  animation: marquee-scroll 12s linear infinite;
+}
+
+.marquee span:nth-child(2) {
+  animation-delay: 6s;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0);}
+  100% { transform: translateX(-100%);}
+}
+
 
 .projects-preview {
   width: 100%;
