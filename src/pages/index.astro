@@ -1,13 +1,17 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
 import { getCollection } from "astro:content";
 
-const projectPreviews = (await getCollection("projects"))
+const projectPreviews = (
+	(await getCollection("projects")) as CollectionEntry<"projects">[]
+)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 
-const blogPosts = (await getCollection("blog"))
+const blogPosts = ((await getCollection("blog")) as CollectionEntry<"blog">[])
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 

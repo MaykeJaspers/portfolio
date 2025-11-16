@@ -1,9 +1,13 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import { getCollection } from "astro:content";
 
-const projects = await getCollection("projects");
+const projects = (await getCollection(
+    "projects",
+)) as CollectionEntry<"projects">[];
 ---
 
 <BaseLayout title="Projects | Mayke Jaspers">
