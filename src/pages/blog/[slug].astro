@@ -20,7 +20,7 @@ if (!post) {
 <BaseLayout title={post.data.title + " | Blog"}>
     <Navigation />
     <main class="blog-detail">
-        <h1>{post.data.title}</h1>
+        <h2>{post.data.title}</h2>
         {
             post.data.tags && (
                 <div class="blog-tags">
@@ -36,7 +36,7 @@ if (!post) {
                 <img
                     src={post.data.image}
                     alt={post.data.title}
-                    class="blog-detail-img"
+                    class="project-detail-img"
                 />
             )
         }

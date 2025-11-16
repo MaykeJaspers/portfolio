@@ -8,22 +8,33 @@ const projects = await getCollection("projects");
 
 <BaseLayout title="Projects | Mayke Jaspers">
     <Navigation />
-    <main>
-        <h1>All projects</h1>
-        <div class="projects-overview-list">
+    <main class="projects-main">
+        <h2>All <span class="accent">projects</span></h2>
+        <div class="projects-overview-grid">
             {
-                projects.map((p) => (
+                projects.map((project) => (
                     <a
-                        href={`/projects/${p.slug}`}
-                        class="project-overview-card"
+                        href={`/projects/${project.slug}`}
+                        class="project-grid-card"
                     >
-                        {p.data.image && (
+                        {project.data.image && (
                             <img
-                                src={p.data.image}
-                                alt={p.data.title}
-                                class="project-overview-img"
+                                src={project.data.image}
+                                alt={project.data.title}
+                                class="project-grid-img"
                             />
                         )}
+                        <div class="project-card-titlebar">
+                            <span class="project-grid-title">
+                                {project.data.title}
+                            </span>
+                            {project.data.tag && (
+                                <span class="project-grid-tag">
+                                    {project.data.tag}
+                                </span>
+                            )}
+                        </div>
+                        <span class="project-arrow">→</span>
                     </a>
                 ))
             }

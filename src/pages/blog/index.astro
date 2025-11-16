@@ -3,29 +3,33 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import { getCollection } from "astro:content";
 
-
 const blogPosts = await getCollection("blog");
 ---
 
 <BaseLayout title="Blog | Mayke Jaspers">
     <Navigation />
-    <main>
-        <h1>All blog posts</h1>
-        <div class="blog-overview-list">
+    <main class="blog-main">
+        <h2>All <span class="accent">blog posts</span></h2>
+        <div class="blog-overview-grid">
             {
                 blogPosts.map((post) => (
-                    <a href={`/blog/${post.slug}`} class="blog-overview-card">
+                    <a href={`/blog/${post.slug}`} class="blog-grid-card">
                         {post.data.image && (
                             <img
                                 src={post.data.image}
                                 alt={post.data.title}
-                                class="blog-overview-img"
+                                class="blog-grid-img"
                             />
                         )}
-                        <div class="blog-overview-title">{post.data.title}</div>
-                        <div class="blog-overview-desc">
-                            {post.data.description}
+                        <div class="blog-card-titlebar">
+                            <span class="blog-grid-title">
+                                {post.data.title}
+                            </span>
+                            <span class="blog-grid-desc">
+                                {post.data.description}
+                            </span>
                         </div>
+                        <span class="blog-arrow">→</span>
                     </a>
                 ))
             }
