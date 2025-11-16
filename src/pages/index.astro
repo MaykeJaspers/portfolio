@@ -1,26 +1,28 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
 import { getCollection } from "astro:content";
 
-
-const projectPreviews = (await getCollection("projects"))
+const projectPreviews = (
+	(await getCollection("projects")) as CollectionEntry<"projects">[]
+)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 
-
-const blogPosts = (await getCollection("blog"))
+const blogPosts = ((await getCollection("blog")) as CollectionEntry<"blog">[])
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 
 const programs = [
-	"Photoshop",
-	"Figma",
-	"Astro",
-	"Blender",
-	"Premiere Pro",
-	"Illustrator",
-	"After Effects",
+	{ name: "Photoshop", icon: "/src/images/tools/photoshop.png" },
+	{ name: "Figma", icon: "/src/images/tools/figma.webp" },
+	{ name: "Astro", icon: "/src/images/tools/astro.png" },
+	{ name: "Blender", icon: "/src/images/tools/blender.png" },
+	{ name: "Premiere Pro", icon: "/src/images/tools/premiere.png" },
+	{ name: "Illustrator", icon: "/src/images/tools/illustrator.png" },
+	{ name: "After Effects", icon: "/src/images/tools/after-effects.png" },
 ];
 ---
 
@@ -55,27 +57,24 @@ const programs = [
 				</div>
 			</div>
 		</section>
-
-		<section class="projects-preview">
-			<h2 class="projects-preview-title">Recent Projects</h2>
-			<div class="projects-preview-list">
+		<section class="projects-gallery">
+			<h2>Latest<span class="accent">projects</span></h2>
+			<div class="projects-gallery-list">
 				{
 					projectPreviews.map((project) => (
 						<a
 							href={`/projects/${project.slug}`}
-							class="project-preview-card"
+							class="project-gallery-tile"
+							aria-label={project.data.title}
 						>
 							<img
 								src={project.data.image}
 								alt={project.data.title}
-								class="project-preview-img"
+								class="project-gallery-img"
 								loading="lazy"
 							/>
-							<div class="project-preview-title">
+							<div class="project-gallery-title">
 								{project.data.title}
-							</div>
-							<div class="project-preview-tag">
-								{project.data.tag}
 							</div>
 						</a>
 					))
@@ -83,16 +82,24 @@ const programs = [
 			</div>
 		</section>
 
-		<section class="programs-section">
-			<h2 class="programs-title">Tools & programs I use</h2>
-			<ul class="programs-list">
-				{programs.map((name) => <li class="programs-item">{name}</li>)}
-			</ul>
+		<section class="tools-section">
+			<h2>Tools &<span class="accent">programs</span></h2>
+			<div class="tools-grid">
+				{
+					programs.map(({ name, icon }) => (
+						<div class="tool-item">
+							<div class="tool-icon">
+								<img src={icon} alt={name + " logo"} />
+							</div>
+							<span class="tool-name">{name}</span>
+						</div>
+					))
+				}
+			</div>
 		</section>
-
-		<section class="blog-preview">
-			<h2 class="blog-preview-title">Latest blog posts</h2>
-			<div class="blog-preview-list">
+		<section class="blog-preview-section">
+			<h2>Latest<span class="accent">blog posts</span></h2>
+			<div class="blog-preview-grid">
 				{
 					blogPosts.map((post) => (
 						<a
@@ -107,12 +114,16 @@ const programs = [
 									loading="lazy"
 								/>
 							)}
-							<div class="blog-preview-title">
-								{post.data.title}
+							<div class="blog-preview-info">
+								<span class="blog-preview-label">Blog</span>
+								<h3 class="blog-preview-h3">
+									{post.data.title}
+								</h3>
+								<span class="blog-preview-desc">
+									{post.data.description}
+								</span>
 							</div>
-							<div class="blog-preview-desc">
-								{post.data.description}
-							</div>
+							<span class="blog-preview-arrow">→</span>
 						</a>
 					))
 				}

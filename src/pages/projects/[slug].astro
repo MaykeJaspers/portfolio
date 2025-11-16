@@ -2,34 +2,32 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import { getEntryBySlug, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-// getStaticPaths code here (as you wrote!)
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
-    return projects.map((project) => ({
+    return projects.map((project: CollectionEntry<"projects">) => ({
         params: { slug: project.slug },
         props: { project },
     }));
 }
 
-const { project } = Astro.props;
-if (!project) {
-    throw new Error("Project not found");
-}
+
+const { project } = Astro.props as { project: CollectionEntry<"projects"> };
+if (!project) throw new Error("Project not found");
 ---
 
 <BaseLayout title={project.data.title + " | Mayke Jaspers"}>
     <Navigation />
     <main class="project-detail">
-        <h1>{project.data.title}</h1>
+        <h2>{project.data.title}</h2>
         <img
             src={project.data.image}
             alt={project.data.title}
             class="project-detail-img"
         />
-
         <div class="project-detail-body">
-            {project.body}
+            {await project.render()}
         </div>
     </main>
 </BaseLayout>

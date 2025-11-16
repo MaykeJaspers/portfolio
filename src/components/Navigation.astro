@@ -3,10 +3,13 @@
     <button
         class="nav-toggle"
         aria-label="Open menu"
-        onclick="document.querySelector('.nav-links').classList.toggle('open')"
+        onclick="document.querySelector('.nav-links').classList.toggle('open'); this.classList.toggle('active')"
     >
-        ☰
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
     </button>
+
     <div class="nav-links">
         <ul>
             <li><a href="/">Home</a></li>
