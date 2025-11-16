@@ -22,6 +22,16 @@ if (!post) {
     <main class="blog-detail">
         <h1>{post.data.title}</h1>
         {
+            post.data.tags && (
+                <div class="blog-tags">
+                    {post.data.tags.map((tag) => (
+                        <span class="blog-tag">{tag}</span>
+                    ))}
+                </div>
+            )
+        }
+
+        {
             post.data.image && (
                 <img
                     src={post.data.image}
