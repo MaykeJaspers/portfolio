@@ -1,24 +1,38 @@
 import { defineCollection, z } from "astro:content";
 
+const projects = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    tag: z.string(),            // visual-design, motion, 3d, etc.
+    description: z.string(),
+    image: z.string().optional(),
+    date: z.date(),
+  }),
+});
+
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    image: z.string().optional(),
+    video: z.string().optional(),
+    date: z.date(),
+  }),
+});
+
+const tools = defineCollection({
+  type: "data",
+  schema: z.object({
+    name: z.string(),
+    icon: z.string().optional(),
+  }),
+});
+
 export const collections = {
-  projects: defineCollection({
-    type: "content",
-    schema: z.object({
-      title: z.string(),
-      description: z.string(),
-      date: z.date(),
-      tag: z.string(),
-      image: z.string().optional(),
-    }),
-  }),
-  blog: defineCollection({
-    type: "content",
-    schema: z.object({
-      title: z.string(),
-      description: z.string(),
-      date: z.date(),
-      tags: z.array(z.string()).optional(),
-      image: z.string().optional(),  
-    }),
-  }),
+  projects,
+  blog,
+  tools,
 };
+
