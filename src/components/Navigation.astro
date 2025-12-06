@@ -1,5 +1,10 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
 <nav class="nav">
     <a class="logo" href="/">PORTFOLIO</a>
+
     <button
         class="nav-toggle"
         aria-label="Open menu"
@@ -12,10 +17,27 @@
 
     <div class="nav-links">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/blog">Blog</a></li>
+            <li>
+                <a href="/" class={currentPath === "/" ? "active" : ""}>Home</a>
+            </li>
+            <li>
+                <a
+                    href="/about"
+                    class={currentPath.startsWith("/about") ? "active" : ""}
+                    >About</a>
+            </li>
+            <li>
+                <a
+                    href="/projects"
+                    class={currentPath.startsWith("/projects") ? "active" : ""}
+                    >Projects</a>
+            </li>
+            <li>
+                <a
+                    href="/blog"
+                    class={currentPath.startsWith("/blog") ? "active" : ""}
+                    >Blog</a>
+            </li>
         </ul>
     </div>
 </nav>

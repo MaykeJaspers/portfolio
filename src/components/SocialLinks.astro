@@ -1,0 +1,46 @@
+---
+const socials = [
+    { name: "Instagram", url: "https://www.instagram.com/maykejaspers/" },
+    {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/mayke-jaspers-b55380263/",
+    },
+    { name: "Email", url: "mailto:maykejaspers@gmail.com" },
+];
+---
+
+<div class="social-links">
+    {
+        socials.map((s) => (
+            <a
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+            >
+                {s.name}
+            </a>
+        ))
+    }
+</div>
+
+<style>
+    .social-links {
+        display: flex;
+        gap: 1.4rem;
+        margin-top: 0.5rem;
+    }
+
+    .social-link {
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #000;
+        text-decoration: none;
+        transition: opacity 0.2s ease-out;
+    }
+
+    .social-link:hover {
+        opacity: 0.6;
+    }
+</style>
