@@ -1,33 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
-import { getEntryBySlug, getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import ProjectDetail from "../../components/ProjectDetail.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
-    return projects.map((project: CollectionEntry<"projects">) => ({
-        params: { slug: project.slug },
-        props: { project },
+    return projects.map((p) => ({
+        params: { slug: p.slug },
+        props: { project: p },
     }));
 }
 
-
-const { project } = Astro.props as { project: CollectionEntry<"projects"> };
-if (!project) throw new Error("Project not found");
+const { project } = Astro.props;
+const { Content } = await project.render();
 ---
 
-<BaseLayout title={project.data.title + " | Mayke Jaspers"}>
+<BaseLayout title={`${project.data.title} | Projects`}>
     <Navigation />
-    <main class="project-detail">
-        <h2>{project.data.title}</h2>
-        <img
-            src={project.data.image}
-            alt={project.data.title}
-            class="project-detail-img"
-        />
-        <div class="project-detail-body">
-            {await project.render()}
-        </div>
-    </main>
+    <ProjectDetail project={project} Content={Content} />
 </BaseLayout>

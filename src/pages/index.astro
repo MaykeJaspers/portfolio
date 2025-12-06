@@ -1,133 +1,202 @@
 ---
-import type { CollectionEntry } from "astro:content";
-
+import tools from "../data/tools.json";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
 import { getCollection } from "astro:content";
 
-const projectPreviews = (
-	(await getCollection("projects")) as CollectionEntry<"projects">[]
-)
+const blogPosts = (await getCollection("blog"))
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3);
-
-const blogPosts = ((await getCollection("blog")) as CollectionEntry<"blog">[])
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3);
-
-const programs = [
-	{ name: "Photoshop", icon: "/src/images/tools/photoshop.png" },
-	{ name: "Figma", icon: "/src/images/tools/figma.webp" },
-	{ name: "Astro", icon: "/src/images/tools/astro.png" },
-	{ name: "Blender", icon: "/src/images/tools/blender.png" },
-	{ name: "Premiere Pro", icon: "/src/images/tools/premiere.png" },
-	{ name: "Illustrator", icon: "/src/images/tools/illustrator.png" },
-	{ name: "After Effects", icon: "/src/images/tools/after-effects.png" },
-];
+	.slice(0, 2)
+	.map((post) => ({
+		title: post.data.title,
+		description: post.data.description,
+		url: `/blog/${post.slug}`,
+		image: post.data.image || null,
+		video: post.data.video || null,
+	}));
 ---
 
-<BaseLayout title="Home | Mayke Jaspers">
+<BaseLayout title="Portfolio | Mayke Jaspers">
 	<Navigation />
-	<main class="home-main">
-		<section class="hero-content">
-			<h1>CREATIVE<br /><span class="accent">PORTFOLIO</span></h1>
-			<p class="hero-desc">
-				Welcome! Hi my name is mayke and here you can find all my
-				digital projects and experiments below.
-			</p>
-			<a class="projects-link" href="/projects">
-				View Projects
-				<span class="scribble-underline"></span>
-			</a>
-		</section>
 
+	<main class="home">
+		<!-- HERO SECTION -->
+		<section class="hero">
+			<div class="hero-inner">
+				<header class="hero-header">
+					<div class="hero-logo">PORTFOLIO</div>
+				</header>
+
+				<div class="hero-content">
+					<div class="hero-image-wrap">
+						<img
+							src="/images/header.png"
+							alt="Portrait of Mayke Jaspers with camera"
+							class="hero-image"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
 		<section class="marquee-section">
 			<div class="marquee">
-				<div class="marquee-inner">
+				<div class="marquee-track" id="marqueeTrack">
 					<span
-						>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING
-						&nbsp; • &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
-						CREATIVE THINKING &nbsp; • &nbsp;</span
-					>
+						>CREATIVE THINKING • CREATIVE THINKING • CREATIVE
+						THINKING •
+					</span>
 					<span
-						>CREATIVE THINKING &nbsp; • &nbsp; CREATIVE THINKING
-						&nbsp; • &nbsp; CREATIVE THINKING &nbsp; • &nbsp;
-						CREATIVE THINKING &nbsp; • &nbsp;</span
+						>CREATIVE THINKING • CREATIVE THINKING • CREATIVE
+						THINKING •
+					</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- ABOUT SECTION -->
+		<section class="about">
+			<div class="about-inner">
+				<div class="about-text">
+					<h2 class="about-title">A little bit about myself</h2>
+					<p class="about-body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Quisque non convallis nulla.
+					</p>
+					<a href="/about" class="about-button">Want to know more</a>
+				</div>
+
+				<div class="about-photo-wrap">
+					<img
+						src="/images/aboutme.png"
+						alt="Mayke Jaspers working with camera"
+						class="about-photo"
+					/>
+				</div>
+			</div>
+		</section>
+
+		<!-- DISCOVER -->
+		<section class="discover">
+			<div class="discover-header">
+				<h2 class="discover-title">DISCOVER MY WORK</h2>
+				<div class="video">
+					<a href="/projects/project-two" class="discover-card">
+						<video
+							class="discover-video"
+							src="/videos/AftermovieUnderpressure.mp4"
+							autoplay
+							muted
+							loop
+							playsinline></video>
+					</a>
+				</div>
+				<div class="discover-actions">
+					<a href="/projects" class="discover-all-btn">DISCOVER ALL</a
 					>
 				</div>
 			</div>
 		</section>
-		<section class="projects-gallery">
-			<h2>Latest<span class="accent">projects</span></h2>
-			<div class="projects-gallery-list">
-				{
-					projectPreviews.map((project) => (
-						<a
-							href={`/projects/${project.slug}`}
-							class="project-gallery-tile"
-							aria-label={project.data.title}
-						>
-							<img
-								src={project.data.image}
-								alt={project.data.title}
-								class="project-gallery-img"
-								loading="lazy"
-							/>
-							<div class="project-gallery-title">
-								{project.data.title}
-							</div>
-						</a>
-					))
-				}
-			</div>
-		</section>
 
-		<section class="tools-section">
-			<h2>Tools &<span class="accent">programs</span></h2>
+		<section class="tools">
+			<h2 class="tools-title">TOOLS I USE</h2>
+
 			<div class="tools-grid">
 				{
-					programs.map(({ name, icon }) => (
-						<div class="tool-item">
+					tools.map((tool) => (
+						<div class="tool-card">
 							<div class="tool-icon">
-								<img src={icon} alt={name + " logo"} />
+								<img
+									src={tool.icon}
+									alt={tool.name}
+									loading="lazy"
+								/>
 							</div>
-							<span class="tool-name">{name}</span>
+							<div class="tool-name">{tool.name}</div>
 						</div>
 					))
 				}
 			</div>
 		</section>
-		<section class="blog-preview-section">
-			<h2>Latest<span class="accent">blog posts</span></h2>
-			<div class="blog-preview-grid">
-				{
-					blogPosts.map((post) => (
-						<a
-							href={`/blog/${post.slug}`}
-							class="blog-preview-card"
-						>
-							{post.data.image && (
-								<img
-									src={post.data.image}
-									alt={post.data.title}
-									class="blog-preview-img"
-									loading="lazy"
-								/>
-							)}
-							<div class="blog-preview-info">
-								<span class="blog-preview-label">Blog</span>
-								<h3 class="blog-preview-h3">
-									{post.data.title}
-								</h3>
-								<span class="blog-preview-desc">
-									{post.data.description}
-								</span>
-							</div>
-							<span class="blog-preview-arrow">→</span>
-						</a>
-					))
-				}
+
+		<!-- BLOGS -->
+		<section class="blogs">
+			<div class="blogs-inner">
+				<div class="blogs-text">
+					<h2 class="blogs-title">BLOGS</h2>
+					<p class="blogs-body">
+						Some thoughts, projects, and creative explorations.
+					</p>
+					<a href="/blog" class="blogs-button">READ MORE</a>
+				</div>
+
+				<div class="blogs-preview">
+					{
+						blogPosts.map((post) => (
+							<a href={post.url} class="blogs-card">
+								<div class="blogs-card-thumb">
+									{post.video ? (
+										<video
+											src={post.video}
+											autoplay
+											muted
+											loop
+											playsinline
+											class="blogs-card-img"
+										/>
+									) : (
+										<img
+											src={post.image}
+											alt={post.title}
+											class="blogs-card-img"
+										/>
+									)}
+								</div>
+								<div class="blogs-card-info">
+									<h3 class="blogs-card-title">
+										{post.title}
+									</h3>
+									<p class="blogs-card-desc">
+										{post.description}
+									</p>
+								</div>
+							</a>
+						))
+					}
+				</div>
 			</div>
 		</section>
 	</main>
 </BaseLayout>
+
+<script>
+	import gsap from "gsap";
+
+	if (typeof window !== "undefined") {
+		window.addEventListener("load", () => {
+			// HERO
+			gsap.from(".hero-logo", {
+				y: 40,
+				opacity: 0,
+				duration: 0.9,
+				ease: "power2.out",
+			});
+
+			gsap.from(".hero-image", {
+				y: 40,
+				opacity: 0,
+				duration: 0.9,
+				delay: 0.2,
+				ease: "power2.out",
+			});
+
+			// DISCOVER SECTION
+			gsap.from(".discover", {
+				y: 60,
+				opacity: 0,
+				duration: 0.9,
+				delay: 0.5,
+				ease: "power2.out",
+			});
+		});
+	}
+</script>

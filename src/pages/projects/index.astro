@@ -1,47 +1,31 @@
 ---
-import type { CollectionEntry } from "astro:content";
-
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
-import { getCollection } from "astro:content";
 
-const projects = (await getCollection(
-    "projects",
-)) as CollectionEntry<"projects">[];
+const categories = [
+  { label: "Visual Design", tag: "visual-design" },
+  { label: "Motion", tag: "motion" },
+  { label: "3D", tag: "3d" },
+  { label: "Graphic Design", tag: "graphic-design" },
+  { label: "Web", tag: "web" },
+  { label: "Creative Code", tag: "creative-code" },
+];
 ---
 
 <BaseLayout title="Projects | Mayke Jaspers">
-    <Navigation />
-    <main class="projects-main">
-        <h2>All <span class="accent">projects</span></h2>
-        <div class="projects-overview-grid">
-            {
-                projects.map((project) => (
-                    <a
-                        href={`/projects/${project.slug}`}
-                        class="project-grid-card"
-                    >
-                        {project.data.image && (
-                            <img
-                                src={project.data.image}
-                                alt={project.data.title}
-                                class="project-grid-img"
-                            />
-                        )}
-                        <div class="project-card-titlebar">
-                            <span class="project-grid-title">
-                                {project.data.title}
-                            </span>
-                            {project.data.tag && (
-                                <span class="project-grid-tag">
-                                    {project.data.tag}
-                                </span>
-                            )}
-                        </div>
-                        <span class="project-arrow">→</span>
-                    </a>
-                ))
-            }
-        </div>
-    </main>
+  <Navigation />
+
+  <main class="projects-page">
+    <section class="projects-grid-section">
+      <div class="projects-grid">
+        {
+          categories.map((cat) => (
+            <a href={`/projects/${cat.tag}`} class="projects-tile">
+              <span class="projects-tile-label">{cat.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
 </BaseLayout>

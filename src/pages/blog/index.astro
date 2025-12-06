@@ -1,39 +1,69 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import { getCollection } from "astro:content";
 
-const blogPosts = (await getCollection("blog")) as CollectionEntry<"blog">[];
+const posts = (await getCollection("blog")).sort(
+    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+);
 ---
 
 <BaseLayout title="Blog | Mayke Jaspers">
     <Navigation />
-    <main class="blog-main">
-        <h2>All <span class="accent">blog posts</span></h2>
-        <div class="blog-overview-grid">
-            {
-                blogPosts.map((post) => (
-                    <a href={`/blog/${post.slug}`} class="blog-grid-card">
-                        {post.data.image && (
-                            <img
-                                src={post.data.image}
-                                alt={post.data.title}
-                                class="blog-grid-img"
-                            />
-                        )}
-                        <div class="blog-card-titlebar">
-                            <span class="blog-grid-title">
-                                {post.data.title}
-                            </span>
-                            <span class="blog-grid-desc">
-                                {post.data.description}
-                            </span>
-                        </div>
-                        <span class="blog-arrow">→</span>
-                    </a>
-                ))
-            }
-        </div>
+
+    <main class="blog-page">
+        <section class="blog-hero">
+            <div class="blog-hero-inner">
+                <h1 class="blog-hero-title">MY BLOG</h1>
+            </div>
+        </section>
+
+        <section class="blog-list-section">
+            <div class="blog-list-inner">
+                {
+                    posts.map((post) => (
+                        <article class="blog-list-item">
+                            <a
+                                href={`/blog/${post.slug}`}
+                                class="blog-list-thumb"
+                            >
+                                {post.data.video ? (
+                                    <video
+                                        src={post.data.video}
+                                        class="blog-list-img"
+                                        autoplay
+                                        muted
+                                        loop
+                                        playsinline
+                                    />
+                                ) : post.data.image ? (
+                                    <img
+                                        src={post.data.image}
+                                        alt={post.data.title}
+                                        class="blog-list-img"
+                                        loading="lazy"
+                                    />
+                                ) : null}
+                            </a>
+
+                            <div class="blog-list-content">
+                                <h2 class="blog-list-title">
+                                    {post.data.title}
+                                </h2>
+                                <p class="blog-list-excerpt">
+                                    {post.data.description}
+                                </p>
+                                <a
+                                    href={`/blog/${post.slug}`}
+                                    class="blog-list-button"
+                                >
+                                    READ MORE
+                                </a>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
     </main>
 </BaseLayout>

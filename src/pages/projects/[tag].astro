@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/Navigation.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+    const tags = [...new Set(projects.map((p) => p.data.tag))];
+
+    return tags.map((tag) => ({
+        params: { tag },
+        props: { tag },
+    }));
+}
+
+const { tag } = Astro.params;
+const allProjects = await getCollection("projects");
+const filtered = allProjects.filter((p) => p.data.tag === tag);
+---
+
+<BaseLayout title={`${tag} | Projects`}>
+    <Navigation />
+
+    <main class="projects-category-page">
+        <h1 class="category-title">{tag.replace("-", " ").toUpperCase()}</h1>
+
+        <div class="projects-grid">
+            {
+                filtered.map((p) => (
+                    <a href={`/projects/${p.slug}`} class="projects-tile">
+                        <span class="projects-tile-label">{p.data.title}</span>
+                    </a>
+                ))
+            }
+        </div>
+    </main>
+</BaseLayout>
