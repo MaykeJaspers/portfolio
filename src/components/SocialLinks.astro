@@ -1,11 +1,20 @@
 ---
 const socials = [
-    { name: "Instagram", url: "https://www.instagram.com/maykejaspers/" },
+    {
+        name: "Instagram",
+        url: "https://www.instagram.com/maykejaspers/",
+        icon: "/portfolio/images/instagram.svg",
+    },
     {
         name: "LinkedIn",
         url: "https://www.linkedin.com/in/mayke-jaspers-b55380263/",
+        icon: "/portfolio/images/linkedin.svg",
     },
-    { name: "Email", url: "mailto:maykejaspers@gmail.com" },
+    {
+        name: "Email",
+        url: "mailto:maykejaspers@gmail.com",
+        icon: "/portfolio/images/email.svg",
+    },
 ];
 ---
 
@@ -17,8 +26,9 @@ const socials = [
                 target="_blank"
                 rel="noopener noreferrer"
                 class="social-link"
+                aria-label={s.name}
             >
-                {s.name}
+                <img src={s.icon} alt={s.name} class="social-icon" />
             </a>
         ))
     }
@@ -29,18 +39,27 @@ const socials = [
         display: flex;
         gap: 1.4rem;
         margin-top: 0.5rem;
+        justify-content: center;
+        align-items: center;
     }
 
     .social-link {
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #000;
-        text-decoration: none;
-        transition: opacity 0.2s ease-out;
+        display: inline-flex;
+        width: 28px;
+        height: 28px;
+        transition:
+            opacity 0.2s ease-out,
+            transform 0.2s ease-out;
     }
 
     .social-link:hover {
-        opacity: 0.6;
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+
+    .social-icon {
+        width: 100%;
+        height: 100%;
+        filter: brightness(0) invert(0);
     }
 </style>

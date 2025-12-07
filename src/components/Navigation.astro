@@ -3,7 +3,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <nav class="nav">
-    <a class="logo" href="/">PORTFOLIO</a>
+    <a class="logo" href="/portfolio/">PORTFOLIO</a>
 
     <button
         class="nav-toggle"
@@ -17,26 +17,49 @@ const currentPath = Astro.url.pathname;
 
     <div class="nav-links">
         <ul>
-            <li>
-                <a href="/" class={currentPath === "/" ? "active" : ""}>Home</a>
-            </li>
+            <!-- HOME -->
             <li>
                 <a
-                    href="/about"
-                    class={currentPath.startsWith("/about") ? "active" : ""}
-                    >About</a>
+                    href="/portfolio/"
+                    class={currentPath === "/portfolio/" ? "active" : ""}
+                >
+                    Home
+                </a>
             </li>
+
+            <!-- ABOUT -->
             <li>
                 <a
-                    href="/projects"
-                    class={currentPath.startsWith("/projects") ? "active" : ""}
-                    >Projects</a>
+                    href="/portfolio/about"
+                    class={currentPath.startsWith("/portfolio/about")
+                        ? "active"
+                        : ""}
+                >
+                    About
+                </a>
             </li>
+
+            <!-- PROJECTS -->
             <li>
                 <a
-                    href="/blog"
-                    class={currentPath.startsWith("/blog") ? "active" : ""}
-                    >Blog</a>
+                    href="/portfolio/projects"
+                    class={currentPath.startsWith("/portfolio/projects")
+                        ? "active"
+                        : ""}
+                >
+                    Projects
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="/portfolio/blog"
+                    class={currentPath.startsWith("/portfolio/blog")
+                        ? "active"
+                        : ""}
+                >
+                    Blog
+                </a>
             </li>
         </ul>
     </div>

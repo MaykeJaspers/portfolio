@@ -20,7 +20,6 @@ const blogPosts = (await getCollection("blog"))
 	<Navigation />
 
 	<main class="home">
-		<!-- HERO SECTION -->
 		<section class="hero">
 			<div class="hero-inner">
 				<header class="hero-header">
@@ -38,36 +37,34 @@ const blogPosts = (await getCollection("blog"))
 				</div>
 			</div>
 		</section>
+
 		<section class="marquee-section">
 			<div class="marquee">
-				<div class="marquee-track" id="marqueeTrack">
-					<span
-						>CREATIVE THINKING • CREATIVE THINKING • CREATIVE
-						THINKING •
-					</span>
-					<span
-						>CREATIVE THINKING • CREATIVE THINKING • CREATIVE
+				<div class="marquee-track">
+					<span>
+						CREATIVE THINKING • CREATIVE THINKING • CREATIVE
 						THINKING •
 					</span>
 				</div>
 			</div>
 		</section>
 
-		<!-- ABOUT SECTION -->
 		<section class="about">
 			<div class="about-inner">
 				<div class="about-text">
-					<h2 class="about-title">A little bit about myself</h2>
+					<h2 class="about-title">HELLO</h2>
 					<p class="about-body">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Quisque non convallis nulla.
+						My name is Mayke i'am a 22 years old devine student at
+						Howest Kortrijk.
 					</p>
-					<a href="/about" class="about-button">Want to know more</a>
+					<a href="/portfolio/about" class="about-button"
+						>Want to know more</a
+					>
 				</div>
 
 				<div class="about-photo-wrap">
 					<img
-						src="/portfolio/public/images/aboutme.png"
+						src="/portfolio/public/images/about.png"
 						alt="Mayke Jaspers working with camera"
 						class="about-photo"
 					/>
@@ -75,15 +72,17 @@ const blogPosts = (await getCollection("blog"))
 			</div>
 		</section>
 
-		<!-- DISCOVER -->
 		<section class="discover">
 			<div class="discover-header">
 				<h2 class="discover-title">DISCOVER MY WORK</h2>
 				<div class="video">
-					<a href="/projects/project-two" class="discover-card">
+					<a
+						href="/portfolio/projects/project-two"
+						class="discover-card"
+					>
 						<video
 							class="discover-video"
-							src="/videos/AftermovieUnderpressure.mp4"
+							src="/portfolio/videos/AftermovieUnderpressure.mp4"
 							autoplay
 							muted
 							loop
@@ -91,7 +90,8 @@ const blogPosts = (await getCollection("blog"))
 					</a>
 				</div>
 				<div class="discover-actions">
-					<a href="/projects" class="discover-all-btn">DISCOVER ALL</a
+					<a href="/portfolio/projects" class="discover-all-btn"
+						>DISCOVER ALL</a
 					>
 				</div>
 			</div>
@@ -118,7 +118,6 @@ const blogPosts = (await getCollection("blog"))
 			</div>
 		</section>
 
-		<!-- BLOGS -->
 		<section class="blogs">
 			<div class="blogs-inner">
 				<div class="blogs-text">
@@ -126,7 +125,7 @@ const blogPosts = (await getCollection("blog"))
 					<p class="blogs-body">
 						Some thoughts, projects, and creative explorations.
 					</p>
-					<a href="/blog" class="blogs-button">READ MORE</a>
+					<a href="/portfolio/blog" class="blogs-button">READ MORE</a>
 				</div>
 
 				<div class="blogs-preview">
@@ -168,35 +167,52 @@ const blogPosts = (await getCollection("blog"))
 	</main>
 </BaseLayout>
 
-<script>
-	import gsap from "gsap";
+<script is:inline>
+	window.addEventListener("load", () => {
+		const gsap = window.gsap;
+		if (!gsap) return;
 
-	if (typeof window !== "undefined") {
-		window.addEventListener("load", () => {
-			// HERO
-			gsap.from(".hero-logo", {
-				y: 40,
-				opacity: 0,
-				duration: 0.9,
-				ease: "power2.out",
-			});
-
-			gsap.from(".hero-image", {
-				y: 40,
-				opacity: 0,
-				duration: 0.9,
-				delay: 0.2,
-				ease: "power2.out",
-			});
-
-			// DISCOVER SECTION
-			gsap.from(".discover", {
-				y: 60,
-				opacity: 0,
-				duration: 0.9,
-				delay: 0.5,
-				ease: "power2.out",
-			});
+		gsap.from(".hero-logo", {
+			y: 40,
+			opacity: 0,
+			duration: 0.9,
+			ease: "power2.out",
 		});
-	}
+
+		gsap.from(".hero-image", {
+			y: 40,
+			opacity: 0,
+			duration: 0.9,
+			delay: 0.2,
+			ease: "power2.out",
+		});
+
+		gsap.from(".discover", {
+			y: 60,
+			opacity: 0,
+			duration: 0.9,
+			delay: 0.5,
+			ease: "power2.out",
+		});
+
+		const track = document.querySelector(".marquee-track");
+		if (!track) return;
+
+		const totalWidth = track.scrollWidth / 1;
+
+		gsap.to(track, {
+			x: -totalWidth,
+			ease: "none",
+			duration: 12,
+			repeat: Infinity,
+			modifiers: {
+				x: (x) => {
+					const val = parseFloat(x);
+					const wrapped =
+						((val + totalWidth) % totalWidth) - totalWidth;
+					return wrapped + "px";
+				},
+			},
+		});
+	});
 </script>

@@ -24,7 +24,7 @@ const posts = (await getCollection("blog")).sort(
                     posts.map((post) => (
                         <article class="blog-list-item">
                             <a
-                                href={`/blog/${post.slug}`}
+                                href={`/portfolio/blog/${post.slug}`}
                                 class="blog-list-thumb"
                             >
                                 {post.data.video ? (
@@ -54,7 +54,7 @@ const posts = (await getCollection("blog")).sort(
                                     {post.data.description}
                                 </p>
                                 <a
-                                    href={`/blog/${post.slug}`}
+                                    href={`/portfolio/blog/${post.slug}`}
                                     class="blog-list-button"
                                 >
                                     READ MORE

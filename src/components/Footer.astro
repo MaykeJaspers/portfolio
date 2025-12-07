@@ -4,7 +4,7 @@ import SocialLinks from "./SocialLinks.astro";
 
 <footer class="site-footer">
     <div class="footer-inner">
-        <h3 class="footer-title">Let's Connect</h3>
+        <h3 class="footer-title">LET'S CONNECT</h3>
 
         <SocialLinks />
 
@@ -14,14 +14,14 @@ import SocialLinks from "./SocialLinks.astro";
 
 <style>
     .site-footer {
-        background: #042061;
-        color: #fff;
+        border: 2px solid #e5e5e5;
+        color: black;
         padding: 3rem 1.5rem;
         margin-top: 4rem;
     }
 
     .footer-inner {
-        max-width: 1100px;
+        max-width: 100%;
         margin: 0 auto;
         text-align: center;
     }
@@ -31,7 +31,7 @@ import SocialLinks from "./SocialLinks.astro";
         font-weight: 900;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: #fff;
+        color: black;
     }
 
     .footer-copy {
@@ -41,8 +41,11 @@ import SocialLinks from "./SocialLinks.astro";
         letter-spacing: 0.1em;
     }
 
-    /* override social-links styling when in dark theme footer */
+    .social-links a {
+        color: black;
+    }
+
     .social-link {
-        color: #fff !important;
+        color: black !important;
     }
 </style>

@@ -3,12 +3,21 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 
 const categories = [
-  { label: "Visual Design", tag: "visual-design" },
-  { label: "Motion", tag: "motion" },
-  { label: "3D", tag: "3d" },
-  { label: "Graphic Design", tag: "graphic-design" },
-  { label: "Web", tag: "web" },
-  { label: "Creative Code", tag: "creative-code" },
+  {
+    label: "Visual Design",
+    tag: "visual-design",
+    image: "/portfolio/images/background.jpg",
+  },
+  {
+    label: "Motion",
+    tag: "motion",
+    image: "/portfolio/images/background.jpg",
+  },
+  {
+    label: "3D",
+    tag: "3d",
+    image: "/portfolio/images/background.jpg",
+  },
 ];
 ---
 
@@ -17,14 +26,24 @@ const categories = [
 
   <main class="projects-page">
     <section class="projects-grid-section">
-      <div class="projects-grid">
-        {
-          categories.map((cat) => (
-            <a href={`/projects/${cat.tag}`} class="projects-tile">
-              <span class="projects-tile-label">{cat.label}</span>
-            </a>
-          ))
-        }
+      <div  class="about-hero-header">
+      
+          <h1 class="about-hero-title">ABOUT ME</h1>
+       
+        <div class="projects-grid">
+          {
+            categories.map((cat) => (
+              <a
+                href={`/portfolio/projects/${cat.tag}`}
+                class="projects-tile"
+                style={`background-image:url(${cat.image})`}
+              >
+                <div class="projects-tile-overlay" />
+                <span class="projects-tile-label">{cat.label}</span>
+              </a>
+            ))
+          }
+        </div>
       </div>
     </section>
   </main>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import tools from "../data/tools.json";
 ---
 
 <BaseLayout title="About | Mayke Jaspers">
@@ -16,26 +17,47 @@ import Navigation from "../components/Navigation.astro";
                 <div class="about-hero-body">
                     <div class="about-hero-text">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Quisque non convallis nulla. Nunc quis
-                            bibendum mauris. Phasellus ac mi sit amet nibh
-                            interdum tempor ut at purus.
+                            Hi! My name is Mayke Jaspers. I’m passionate about
+                            visual design, motion graphics and creative digital
+                            storytelling. I love experimenting with visuals,
+                            refining ideas, and turning creative concepts into
+                            polished results.
                         </p>
-                        <a href="/projects" class="about-hero-btn">READ MORE</a>
+                        <a href="/portfolio/projects" class="about-hero-btn">
+                            VIEW MY WORK
+                        </a>
                     </div>
 
                     <div class="about-hero-photo-wrap">
                         <div class="about-hero-photo-bg"></div>
                         <img
-                            src="/portfolio/public/images/aboutme.png"
+                            src="/portfolio/public/images/about.png"
                             alt="Portrait of Mayke Jaspers"
-                            class="about-hero-photo"
+                            class="about-tools-photo"
                         />
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="about-hero-slash"></section>
+        <section class="about-tools">
+            <h2 class="about-tools-title">Tools I Use</h2>
+
+            <div class="about-tools-grid">
+                {
+                    tools.map((tool) => (
+                        <div class="about-tool-card">
+                            <img
+                                src={tool.icon}
+                                alt={tool.name}
+                                class="about-tool-icon"
+                                loading="lazy"
+                            />
+                            <p class="about-tool-name">{tool.name}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
     </main>
 </BaseLayout>
