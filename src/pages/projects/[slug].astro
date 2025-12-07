@@ -1,33 +1,73 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
 import Navigation from "../../components/Navigation.astro";
-import { getEntryBySlug, getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
-    return projects.map((project: CollectionEntry<"projects">) => ({
-        params: { slug: project.slug },
-        props: { project },
+    return projects.map((p) => ({
+        params: { slug: p.slug },
+        props: { project: p },
     }));
 }
 
-
-const { project } = Astro.props as { project: CollectionEntry<"projects"> };
-if (!project) throw new Error("Project not found");
+const { project } = Astro.props;
+const { Content } = await project.render();
 ---
 
-<BaseLayout title={project.data.title + " | Mayke Jaspers"}>
-    <Navigation />
-    <main class="project-detail">
-        <h2>{project.data.title}</h2>
-        <img
-            src={project.data.image}
-            alt={project.data.title}
-            class="project-detail-img"
-        />
-        <div class="project-detail-body">
-            {await project.render()}
-        </div>
-    </main>
-</BaseLayout>
+<ProjectLayout title={`${project.data.title} | Project`}>
+    <Navigation slot="header" />
+
+    <!-- TITLE -->
+    <section class="project-detail-hero">
+        <h1 class="project-detail-title">{project.data.title}</h1>
+        <p class="project-detail-tag">{project.data.tag}</p>
+    </section>
+
+    <!-- IMAGE -->
+    <img
+        class="project-detail-image"
+        src={project.data.image}
+        alt={project.data.title}
+    />
+
+    <!-- CONTENT -->
+    <article class="project-detail-content">
+        <Content />
+    </article>
+</ProjectLayout>
+
+<style>
+    .project-detail-hero {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .project-detail-title {
+        font-family: var(--font-heading);
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        margin-bottom: 0.5rem;
+    }
+
+    .project-detail-tag {
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        opacity: 0.6;
+        font-size: 0.9rem;
+    }
+
+    .project-detail-image {
+        width: 100%;
+        border-radius: 0.35rem;
+        margin: 2rem 0;
+    }
+
+    .project-detail-content {
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+</style>

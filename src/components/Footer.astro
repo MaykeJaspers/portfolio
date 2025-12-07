@@ -1,0 +1,51 @@
+---
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <h3 class="footer-title">LET'S CONNECT</h3>
+
+        <SocialLinks />
+
+        <p class="footer-copy">© {new Date().getFullYear()} Mayke Jaspers</p>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        border: 2px solid #e5e5e5;
+        color: black;
+        padding: 3rem 1.5rem;
+        margin-top: 4rem;
+    }
+
+    .footer-inner {
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .footer-title {
+        font-size: 1.4rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: black;
+    }
+
+    .footer-copy {
+        opacity: 0.6;
+
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+    }
+
+    .social-links a {
+        color: black;
+    }
+
+    .social-link {
+        color: black !important;
+    }
+</style>

@@ -1,8 +1,8 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogLayout from "../../layouts/BlogLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -13,31 +13,42 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props as { post: CollectionEntry<"blog"> };
-if (!post) throw new Error("Blog post not found");
+const { Content } = await post.render();
 ---
 
-<BaseLayout title={post.data.title + " | Blog"}>
-    <Navigation />
-    <main class="blog-detail">
-        <h1>{post.data.title}</h1>
-        {
-            post.data.tags && (
-                <div class="blog-tags">
-                    {post.data.tags.map((tag) => (
-                        <span class="blog-tag">{tag}</span>
-                    ))}
-                </div>
-            )
-        }
-        {
-            post.data.image && (
-                <img
-                    src={post.data.image}
-                    alt={post.data.title}
-                    class="project-detail-img"
-                />
-            )
-        }
-        <div class="blog-detail-body">{await post.render()}</div>
-    </main>
-</BaseLayout>
+<BlogLayout title={`${post.data.title} | Blog`}>
+    <Navigation slot="header" />
+
+    <section class="blog-detail-main">
+        <p class="blog-detail-breadcrumb">
+            <a href="/portfolio/blog" class="breadcrumb-link">Blog</a> / {post.slug}
+        </p>
+
+        <h1 class="blog-detail-title">{post.data.title}</h1>
+
+        <div class="blog-detail-layout">
+            <div class="blog-detail-text">
+                <Content />
+            </div>
+
+            {
+                post.data.video ? (
+                    <video
+                        src={post.data.video}
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        class="blog-detail-img"
+                    />
+                ) : post.data.image ? (
+                    <img
+                        src={post.data.image}
+                        alt={post.data.title}
+                        class="blog-detail-img"
+                    />
+                ) : null
+            }
+        </div>
+    </section>
+</BlogLayout>

@@ -1,11 +1,11 @@
 ---
-title: "Plantin"
-description: "Telling the story of Plantin"
-date: 2025-11-09
-tag: "Design"
-image: "/src/collection/wireframe02.jpg"
+title: "Christoph Plantin Experience"
+tag: "visual-design"
+description: "Interactive historical storytelling website about the life and legacy of Christoph Plantin."
+image: "/portfolio/images/project01.jpg"
+date: 2025-12-01
 ---
 
-## About this project
+## Overview
 
-Short description.
+This visual design project brings the story of **Christoph Plantin** to life through rich illustrations, typography and interactive storytelling.

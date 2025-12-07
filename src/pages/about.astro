@@ -1,43 +1,62 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import tools from "../data/tools.json";
 ---
 
 <BaseLayout title="About | Mayke Jaspers">
     <Navigation />
-    <main class="about-main creative-layout">
-        <section class="about-feature">
-            <div class="about-hero-text">
-                <h1>
-                    About<br /><span class="accent">me</span>
-                </h1>
-                <p class="about-desc">
-                    Hi, I'm Mayke Jaspers, a 22 year old web designer and
-                    developer born and raised in Merksem, Antwerp, Belgium. I
-                    hold a degree in Web Design and Development from Howest,
-                    where I learned to combine technical skills with creative
-                    thinking.
-                    <br /><br />
-                    I'm passionate about art and design always searching for new
-                    ways to express ideas through digital projects. Outside of coding,
-                    you'll find me exploring the city by bike, sketching, or discovering
-                    design inspiration in everyday life. I love pushing boundaries
-                    and turning creative concepts into interactive experiences.
 
-                    <span class="about-mini"
-                        >web design • creative coding • illustration • Video</span
-                    >
-                </p>
-            </div>
-            <div class="about-hero-imgblock">
-                <div class="about-imgbox">
-                    <img
-                        src="src/images/profile.jpeg"
-                        alt="Portrait of Mayke Jaspers"
-                        class="about-img-main"
-                    />
-                    <span class="about-signature">Mayke Jaspers</span>
+    <main class="about-page">
+        <section class="about-hero">
+            <div class="about-hero-inner">
+                <header class="about-hero-header">
+                    <h1 class="about-hero-title">ABOUT ME</h1>
+                </header>
+
+                <div class="about-hero-body">
+                    <div class="about-hero-text">
+                        <p>
+                            Hi! My name is Mayke Jaspers. I’m passionate about
+                            visual design, motion graphics and creative digital
+                            storytelling. I love experimenting with visuals,
+                            refining ideas, and turning creative concepts into
+                            polished results.
+                        </p>
+                        <a href="/portfolio/projects" class="about-hero-btn">
+                            VIEW MY WORK
+                        </a>
+                    </div>
+
+                    <div class="about-hero-photo-wrap">
+                        <div class="about-hero-photo-bg"></div>
+                        <img
+                            src="/portfolio/public/images/about.png"
+                            alt="Portrait of Mayke Jaspers"
+                            class="about-tools-photo"
+                        />
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="about-tools">
+            <h2 class="about-tools-title">Tools I Use</h2>
+
+            <div class="about-tools-grid">
+                {
+                    tools.map((tool) => (
+                        <div class="about-tool-card">
+                            <img
+                                src={tool.icon}
+                                alt={tool.name}
+                                class="about-tool-icon"
+                                loading="lazy"
+                            />
+                            <p class="about-tool-name">{tool.name}</p>
+                        </div>
+                    ))
+                }
             </div>
         </section>
     </main>
