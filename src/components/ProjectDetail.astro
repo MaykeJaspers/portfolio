@@ -1,0 +1,22 @@
+---
+const { project, Content } = Astro.props;
+---
+
+<main class="project-detail">
+    <section class="project-detail-hero">
+        <h1 class="project-detail-title">{project.data.title}</h1>
+        <p class="project-detail-tag">{project.data.tag}</p>
+    </section>
+
+    <section class="project-detail-body">
+        <img
+            src={project.data.image}
+            alt={project.data.title}
+            class="project-detail-image"
+        />
+
+        <article class="project-detail-content">
+            <Content />
+        </article>
+    </section>
+</main>
