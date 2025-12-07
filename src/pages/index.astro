@@ -10,7 +10,7 @@ const blogPosts = (await getCollection("blog"))
 	.map((post) => ({
 		title: post.data.title,
 		description: post.data.description,
-		url: `/blog/${post.slug}`,
+		url: `/portfolio/blog/${post.slug}`,
 		image: post.data.image || null,
 		video: post.data.video || null,
 	}));
