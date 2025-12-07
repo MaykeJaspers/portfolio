@@ -1,11 +1,8 @@
 ---
-title: "A Digital Society for All"
+title: "Forest Loner"
 tag: "3d"
-description: "Event website design for a digital inclusion conference featuring speakers and accessibility information."
-image: "/portfolio/public/images/project02.png"
+description: "3d modelled scenen of someone iving in the forest"
+image: "/portfolio/images/3d03.png"
 date: 2025-12-01
 ---
 
-## Overview
-
-A modern, clean, and accessible design created for an event about **digital inclusion**.

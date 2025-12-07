@@ -276,6 +276,12 @@ body{
   height: 100%;
 }
 
+@media (max-width: 600px) {
+  .hero-image {
+    width: 25rem;     /* Slightly larger minimum for small screens */
+  }
+}
+
 
 .marquee-section {
      width: 100%;
@@ -381,17 +387,19 @@ body{
   box-shadow: var(--shadow-soft);
 }
 
-.about-photo-wrap{
-  width: 70%;
-}
-
 
 
 .about-photo {
   width: 100%;
+  height: auto;
   display: block;
+  min-width: 260px;
   object-fit: cover;
 }
+
+
+
+
 
 .about-tools-photo{
   width: 100%;
@@ -693,7 +701,8 @@ color: var(--bg);
 @media (max-width: 900px) {
   .about-inner {
     grid-template-columns: 1fr;
-    text-align: left;
+        text-align: center;
+        padding-bottom: 1rem;
   }
 
   .about-photo-wrap {
@@ -917,6 +926,8 @@ color: var(--bg);
 }
 
 
+
+
 .projects-tile::before {
   content: "";
   position: absolute;
@@ -963,6 +974,15 @@ color: var(--bg);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
 }
 
+.projects-category-title {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 4rem; /* adjust for mobile with clamp if needed */
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    text-align: center;
+}
 
 
 .project-detail-hero {

@@ -3,7 +3,7 @@ title: "Finding My Creative Voice Through Motion Design"
 description: "How experimenting with timing, rhythm and movement helped shape my creative identity."
 date: 2025-12-01
 tags: ["motion", "design", "creative-process"]
-video: "/public/videos/blog-1.mp4" 
+video: "/portfolio/videos/blog-1.mp4" 
 ---
 
 ## Finding My Creative Voice Through Motion Design

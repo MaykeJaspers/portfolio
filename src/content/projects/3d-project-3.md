@@ -1,11 +1,8 @@
 ---
-title: "A Digital Society for All"
+title: "Car"
 tag: "3d"
-description: "Event website design for a digital inclusion conference featuring speakers and accessibility information."
-image: "/public/images/project02.png"
+description: "Modeled car"
+image: "/portfolio/images/blog02.jpg"
 date: 2025-12-01
 ---
 
-## Overview
-
-A modern, clean, and accessible design created for an event about **digital inclusion**.

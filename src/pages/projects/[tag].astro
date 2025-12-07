@@ -15,23 +15,122 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const allProjects = await getCollection("projects");
+
+// ONLY projects that belong to this tag
 const filtered = allProjects.filter((p) => p.data.tag === tag);
+
+// Make heading pretty
+const titleDisplay = tag.replace("-", " ").toUpperCase();
 ---
 
-<BaseLayout title={`${tag} | Projects`}>
+<BaseLayout title={`${titleDisplay} | Projects`}>
     <Navigation />
 
     <main class="projects-category-page">
-        <h1 class="category-title">{tag.replace("-", " ").toUpperCase()}</h1>
+        <!-- Breadcrumb -->
+        <nav class="breadcrumbs">
+            <a href="/portfolio/projects">Projects</a>
+            <span>›</span>
+            <span class="current">{titleDisplay}</span>
+        </nav>
 
-        <div class="projects-grid">
+        <!-- Heading -->
+        <section class="category-hero">
+            <h1 class="category-title">{titleDisplay}</h1>
+        </section>
+
+        <!-- PROJECT GRID -->
+        <section class="projects-grid">
             {
-                filtered.map((p) => (
-                    <a href={`/projects/${p.slug}`} class="projects-tile">
-                        <span class="projects-tile-label">{p.data.title}</span>
-                    </a>
-                ))
+                filtered.map((p) => {
+                    const img = p.data.image; // already includes /portfolio/images/...
+
+                    return (
+                        <a
+                            href={`/portfolio/projects/${p.slug}`}
+                            class="projects-tile"
+                            style={`background-image:url(${img});`}
+                        >
+                            <div class="projects-tile-overlay" />
+                            <span class="projects-tile-label">
+                                {p.data.title}
+                            </span>
+                        </a>
+                    );
+                })
             }
-        </div>
+        </section>
     </main>
 </BaseLayout>
+
+<style>
+    .breadcrumbs {
+        max-width: 1100px;
+        margin: 1.5rem auto 0;
+        padding: 0 1.25rem;
+        display: flex;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: black;
+        list-style-type: none;
+        text-decoration: none;
+    }
+
+    .category-title {
+        font-family: var(--font-heading);
+        font-size: clamp(3rem, 6vw, 4.5rem);
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 2rem 0 3rem;
+    }
+
+    .projects-grid {
+        max-width: 1100px;
+        margin: 0 auto 5rem;
+        padding: 0 1.25rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2rem;
+    }
+
+    .projects-tile {
+        height: 210px;
+        border-radius: 0.3rem;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        overflow: hidden;
+        text-decoration: none;
+    }
+
+    .projects-tile-overlay {
+        position: absolute;
+        inset: 0;
+
+        transition: 0.3s ease;
+    }
+
+    .projects-tile:hover .projects-tile-overlay {
+        background: rgba(4, 32, 97, 0.65);
+    }
+
+    .projects-tile-label {
+        position: relative;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 0.4rem 1.2rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-family: var(--font-heading);
+        border-radius: 99px;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+    }
+</style>
