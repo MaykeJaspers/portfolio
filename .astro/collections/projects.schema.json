@@ -7,7 +7,13 @@
         "title": {
           "type": "string"
         },
+        "tag": {
+          "type": "string"
+        },
         "description": {
+          "type": "string"
+        },
+        "image": {
           "type": "string"
         },
         "date": {
@@ -26,21 +32,15 @@
             }
           ]
         },
-        "tag": {
-          "type": "string"
-        },
-        "image": {
-          "type": "string"
-        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
         "title",
+        "tag",
         "description",
-        "date",
-        "tag"
+        "date"
       ],
       "additionalProperties": false
     }

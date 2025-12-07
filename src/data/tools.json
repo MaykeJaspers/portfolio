@@ -1,9 +1,9 @@
 [
-  { "name": "After Effects", "icon": "/images/tools/after-effects.png" },
-  { "name": "Astro", "icon": "/images/tools/astro.png" },
-  { "name": "Blender", "icon": "/images/tools/blender.png" },
-  { "name": "Figma", "icon": "/images/tools/figma.webp" },
-  { "name": "Illustrator", "icon": "/images/tools/illustrator.png" },
-  { "name": "Photoshop", "icon": "/images/tools/photoshop.png" },
-  { "name": "Premiere Pro", "icon": "/images/tools/premiere.png" }
+  { "name": "After Effects", "icon": "/portfolio/public/images/tools/after-effects.png" },
+  { "name": "Astro", "icon": "/portfolio/public/images/tools/astro.png" },
+  { "name": "Blender", "icon": "/portfolio/public/images/tools/blender.png" },
+  { "name": "Figma", "icon": "/portfolio/public/images/tools/figma.webp" },
+  { "name": "Illustrator", "icon": "/portfolio/public/images/tools/illustrator.png" },
+  { "name": "Photoshop", "icon": "/portfolio/public/images/tools/photoshop.png" },
+  { "name": "Premiere Pro", "icon": "/portfolio/public/images/tools/premiere.png" }
 ]

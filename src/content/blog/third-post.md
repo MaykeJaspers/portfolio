@@ -3,7 +3,7 @@ title: "Behind the Scenes: Building a Portfolio That Feels Like Me"
 description: "A look at the creative decisions behind my website design."
 date: 2025-12-03
 tags: ["portfolio", "process", "design-thinking"]
-image: "/images/blog03.png"
+image: "/portfolio/public/images/blog03.png"
 ---
 
 ## Behind the Scenes: Building a Portfolio That Feels Like “Me”

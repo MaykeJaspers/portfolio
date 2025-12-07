@@ -10,6 +10,12 @@
         "description": {
           "type": "string"
         },
+        "image": {
+          "type": "string"
+        },
+        "video": {
+          "type": "string"
+        },
         "date": {
           "anyOf": [
             {
@@ -25,15 +31,6 @@
               "format": "unix-time"
             }
           ]
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "image": {
-          "type": "string"
         },
         "$schema": {
           "type": "string"
